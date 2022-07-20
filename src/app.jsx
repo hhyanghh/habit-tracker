@@ -1,9 +1,11 @@
-import Habit from './components/habit';
+
+import Habits from './components/habits';
+
 import './app.css'
 
 
 function App() {
-  return <Habit></Habit>
+  return <Habits />;
 }
 
 export default App;
