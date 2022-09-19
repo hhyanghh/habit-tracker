@@ -10,8 +10,8 @@ const HabitAddForm = memo(props => {
 		event.preventDefault();
 		// console.log('submit!');
 		// console.log(this.inputRef.current.value);
-		const name = this.inputRef.current.value;
-		name && this.props.onAdd(name);
+		const name = inputRef.current.value;
+		name && props.onAdd(name);
 		// this.inputRef.current.value = '';
 		formRef.current.reset();
 	}
