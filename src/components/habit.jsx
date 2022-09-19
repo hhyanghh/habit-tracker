@@ -2,7 +2,9 @@ import React, {Component} from 'react';
 
 class Habit extends Component {
     handelIncrement = () => {
+        // state object 안에 있는 count를 증가 한 뒤 state를 업데이트 해야 함.
         this.props.onIncrement(this.props.habit);
+        // console.log(event);
     };
 
     handelDecrement = () => {

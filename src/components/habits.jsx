@@ -1,9 +1,13 @@
 import React, {Component} from 'react';
 import Habit from './habit';
+import HabitAddForm from './HabitAddForm';
 
 class Habits extends Component {
+    // state 를 가지고 있고 
 
     handelIncrement = habit => {
+        // consoel.log(`handleIncrement ${habit}`);
+        // 
         this.props.onIncrement(habit);
     };
 
@@ -15,9 +19,16 @@ class Habits extends Component {
         this.props.onDelete(habit);
     };
 
+    handleAdd = name => {
+        this.props.onAdd(name);
+    }
+
 
     render() {
-        return <ul>
+        return (
+            <>
+                <HabitAddForm onAdd={this.handleAdd}/>
+                <ul>
             {
                 this.props.habits.map(habit => (
                     <Habit
@@ -26,10 +37,15 @@ class Habits extends Component {
                         onIncrement={this.handelIncrement}
                         onDecrement={this.handelDecrement}
                         onDelete={this.handleDelete}
+                        onAdd={this.handleAdd}
+                        onReset={this.handleReset}
                     />
                 ))
             }
-        </ul>;
+        </ul>
+        <button className="habits-reset" onClick={this.props.onReset}>Reset All</button>
+            </>
+        )
     }
 }
 

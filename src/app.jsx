@@ -5,6 +5,13 @@ import Habits from './components/habits';
 import Habit from "./components/habit";
 import NavBar from "./components/navBar";
 
+// TODO
+// 1. input 창 + 버튼을 누르면 습관이 추가된다.
+// 2. 습관에는 타이틀, count, increase, decrese, delete 버튼이 있다.
+// 3. reset all btn 이 있다.
+// 4. Navbar가 있다. (타이틀과 전체 count)
+
+
 class App extends Component {
   state = {
     habits: [
@@ -20,8 +27,11 @@ class App extends Component {
     // 리엑트에서는 state를 직접 수정하는것을 지양하자
     const habits = [...this.state.habits];
     const index = habits.indexOf(habit);
+    // console.log(index);
     habits[index].count++;
     this.setState({habits: habits});
+    // key와 value가 같으면 생략가능
+    //this.setState({habis});
   };
 
   handelDecrement = habit => {
@@ -38,11 +48,26 @@ class App extends Component {
   handleDelete = habit => {
     // console.log(`handleDelete ${habit.name}`);
     // 전달받은 배열을 삭제하고 새로 만드는 것
+    // 전달받은 배열을 제외하고 새로운 배열을 만드는 것
 
     const habits = this.state.habits.filter(item => item.id !== habit.id);
     this.setState({habits: habits});
 
   };
+
+  handleAdd = name => {
+    const habits = [...this.state.habits, {id: Date.now(), name: name, count:0}];
+    this.setState({habits});
+  }
+
+  handleReset = () => {
+    const habits = this.state.habits.map(habit => {
+      habit.count = 0;
+      return habit;
+    });
+    this.setState({habits});
+  }
+
 
   render() {
     return (
@@ -53,6 +78,8 @@ class App extends Component {
                 onIncrement={this.handelIncrement}
                 onDecrement={this.handelDecrement}
                 onDelete={this.handleDelete}
+                onAdd={this.handleAdd}
+                onReset={this.handleReset}
 
             ></Habits>
           </>
